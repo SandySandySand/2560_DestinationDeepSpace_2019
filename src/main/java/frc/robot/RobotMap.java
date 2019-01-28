@@ -20,8 +20,13 @@ public class RobotMap
   public static int leftFollowMotor = 3;
   public static int rightMotor = 2;
   public static int rightFollowMotor = 4;
+  public static int elevatorMotor = 5;
 
   //multiplier values
   public static double arcaSpeedMulti = 0.85;
   public static double arcaRotateMulti = 0.75;
+
+  //Buttons
+  public static int up = 1;
+  public static int down = 2;
 }

@@ -6,7 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
+import frc.robot.commands.liftUp;
+import frc.robot.commands.GoDown;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,16 +21,22 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI 
 {
    Joystick joy1;
+   JoystickButton up, down;
 
    public OI()
    {
       joy1 = new Joystick(1);
-   }
 
+      up = new JoystickButton(joy1, RobotMap.up);
+      up.whileHeld(new liftUp());
+
+      down = new JoystickButton(joy1, RobotMap.down);
+      down.whileHeld(new GoDown());
+   }
 
    public Joystick getJoy1()
 	 {
-    return joy1;
+       return joy1;
 	 }
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
