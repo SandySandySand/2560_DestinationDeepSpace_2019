@@ -27,7 +27,7 @@ public class liftUp extends Command
   @Override
   protected void execute() 
   {
-    Robot.elevator.liftUp(0.85);
+    Robot.elevator.liftUp(0.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
