@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -19,12 +20,15 @@ import frc.robot.RobotMap;
 public class Elevator extends Subsystem 
 {
   CANSparkMax lift;
+  CANEncoder SMencoder;
 
   public Elevator()
   {
     lift = new CANSparkMax(RobotMap.elevatorMotor, MotorType.kBrushless);
+    SMencoder = new CANEncoder(lift);
   }
 
+  //motor values
   public void liftUp(double power)
   {
     lift.set(power);
@@ -38,6 +42,12 @@ public class Elevator extends Subsystem
   public void stop()
   {
     lift.stopMotor();
+  }
+
+  //encoders
+  public double getEncoderPos()
+  {
+    return SMencoder.getPosition();
   }
 
   @Override
