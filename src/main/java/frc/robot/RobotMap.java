@@ -29,4 +29,9 @@ public class RobotMap
   //Buttons
   public static int up = 1;
   public static int down = 2;
+  public static int dropElbow = 3;
+  public static int liftElbow = 4;
+
+  //PWM Values
+  public static int drop = 1;
 }

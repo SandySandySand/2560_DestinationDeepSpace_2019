@@ -11,8 +11,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-import frc.robot.commands.liftUp;
+import frc.robot.commands.LiftUp;
+import frc.robot.commands.DropElbowGroup;
 import frc.robot.commands.GoDown;
+import frc.robot.commands.LiftElbowGroup;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -21,40 +23,27 @@ import frc.robot.commands.GoDown;
 public class OI 
 {
    Joystick joy1;
-   JoystickButton up, down;
+   JoystickButton up, down, dropElbow, liftElbow;
 
    public OI()
    {
       joy1 = new Joystick(1);
 
       up = new JoystickButton(joy1, RobotMap.up);
-      up.whileHeld(new liftUp());
+      up.whileHeld(new LiftUp());
 
       down = new JoystickButton(joy1, RobotMap.down);
       down.whileHeld(new GoDown());
+
+      dropElbow = new JoystickButton(joy1, RobotMap.dropElbow);
+      dropElbow.whenPressed(new DropElbowGroup());
+
+      liftElbow = new JoystickButton(joy1, RobotMap.liftElbow);
+      liftElbow.whenPressed(new LiftElbowGroup());
    }
 
    public Joystick getJoy1()
 	 {
        return joy1;
 	 }
-  // There are a few additional built in buttons you can use. Additionally,
-  // by subclassing Button you can create custom triggers and bind those to
-  // commands the same as any other Button.
-
-  //// TRIGGERING COMMANDS WITH BUTTONS
-  // Once you have a button, it's trivial to bind it to a button in one of
-  // three ways:
-
-  // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenPressed(new ExampleCommand());
-
-  // Run the command while the button is being held down and interrupt it once
-  // the button is released.
-  // button.whileHeld(new ExampleCommand());
-
-  // Start the command when the button is released and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenReleased(new ExampleCommand());
 }

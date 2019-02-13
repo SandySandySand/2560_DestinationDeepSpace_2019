@@ -10,24 +10,22 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftUp extends Command 
-{
-  public LiftUp() 
+public class DropElbow extends Command {
+  public DropElbow() 
   {
-    requires(Robot.elevator);
+    requires(Robot.elbow);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() 
-  {
+  protected void initialize() {
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() 
   {
-    Robot.elevator.liftUp(0.85);
+    Robot.elbow.dropElbow(0.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -38,16 +36,12 @@ public class LiftUp extends Command
 
   // Called once after isFinished returns true
   @Override
-  protected void end() 
-  {
-    Robot.elevator.stop();
+  protected void end() {
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() 
-  {
-    end();
+  protected void interrupted() {
   }
 }
