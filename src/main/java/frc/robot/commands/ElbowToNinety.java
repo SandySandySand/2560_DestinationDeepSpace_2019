@@ -10,29 +10,31 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftElbow extends Command 
+public class ElbowToNinety extends Command 
 {
-  public LiftElbow() 
+  public ElbowToNinety() 
   {
     requires(Robot.elbow);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize() 
+  {
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() 
   {
-    Robot.elbow.liftElbow(0.5);
+    Robot.elbow.liftElbow(0.35);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    return false;
+  protected boolean isFinished() 
+  {
+    return Robot.elbow.getNinety();
   }
 
   // Called once after isFinished returns true

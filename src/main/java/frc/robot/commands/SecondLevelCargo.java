@@ -7,14 +7,22 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class LiftElbowGroup extends CommandGroup {
+public class SecondLevelCargo extends CommandGroup 
+{
   /**
-   * Lifts Elbow for certain time
+   * Cargo to Second Level
    */
-  public LiftElbowGroup() 
+  public SecondLevelCargo() 
   {
-    addSequential(new LiftElbow(), 0.2);
+    addSequential(new ElbowToNinety()); //sets the elbow to full upright using limit switch
+    Timer.delay(1); //pause for effect
+    addSequential(new LiftToHeight(52)); //lift to 4 inches below port hole
+    addSequential(new StallLift(), 5); //stalls lift for 5 seconds
+    addParallel(new ElbowToAngle(45)); //changes Angle
+    Timer.delay(1); //pause for effect
+    addSequential(new Out(), 2); //pushes cargo out
   }
 }

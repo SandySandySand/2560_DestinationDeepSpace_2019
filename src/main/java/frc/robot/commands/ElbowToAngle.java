@@ -10,29 +10,43 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftElbow extends Command 
+public class ElbowToAngle extends Command 
 {
-  public LiftElbow() 
+
+  private double requiredAngle;
+  private boolean fin;
+
+  public ElbowToAngle(double requiredAngle) 
   {
     requires(Robot.elbow);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize() 
+  {
+    Robot.elbow.resetEnc();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() 
   {
-    Robot.elbow.liftElbow(0.5);
+    double ticksTo = requiredAngle * Robot.elbow.TICKS_PER_DEGREE;
+
+    Robot.elbow.dropElbow(0.35);
+
+    if(Robot.elbow.getPosition() >= ticksTo)
+      fin = true;
+    else
+      fin = false;
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    return false;
+  protected boolean isFinished() 
+  {
+    return fin;
   }
 
   // Called once after isFinished returns true

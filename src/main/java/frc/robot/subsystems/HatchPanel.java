@@ -7,50 +7,36 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * 
  */
-public class Elevator extends Subsystem
+public class HatchPanel extends Subsystem 
 {
-  CANSparkMax lift;
-  CANEncoder SMencoder;
 
-  //public double programmingStop = 70.5;
-  public final double TICKS_PER_INCH = 0.9125;
+  public DoubleSolenoid hpSole;
 
-  public Elevator()
+  public HatchPanel()
   {
-    lift = new CANSparkMax(RobotMap.elevatorMotor, MotorType.kBrushless);
-    SMencoder = new CANEncoder(lift);
+    hpSole = new DoubleSolenoid(RobotMap.hpPortOne, RobotMap.hpPortTwo);
   }
 
-  //motor values
-  public void liftUp(double power)
+  public void set()
   {
-    lift.set(power);
+    hpSole.set(DoubleSolenoid.Value.kForward);
   }
 
-  public void goDown(double power)
+  public void unset()
   {
-    lift.set(-power);
+    hpSole.set(DoubleSolenoid.Value.kReverse);
   }
 
-  public void stop()
+  public void off()
   {
-    lift.stopMotor();
-  }
-
-  //encoders
-  public double getEncoderPos()
-  {
-    return SMencoder.getPosition();
+    hpSole.set(DoubleSolenoid.Value.kOff);
   }
 
   @Override

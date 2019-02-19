@@ -7,50 +7,48 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
- */
-public class Elevator extends Subsystem
+* Code to run the intake wheels
+*/
+public class Intake extends Subsystem 
 {
-  CANSparkMax lift;
-  CANEncoder SMencoder;
+  Spark leftWheel, rightWheel;
+  DigitalInput item;
 
-  //public double programmingStop = 70.5;
-  public final double TICKS_PER_INCH = 0.9125;
-
-  public Elevator()
+  public Intake()
   {
-    lift = new CANSparkMax(RobotMap.elevatorMotor, MotorType.kBrushless);
-    SMencoder = new CANEncoder(lift);
+    leftWheel = new Spark(RobotMap.leftIntake);
+    rightWheel = new Spark(RobotMap.rightIntake);
+
+    item  = new DigitalInput(RobotMap.itemLimit);
   }
 
-  //motor values
-  public void liftUp(double power)
+  public void grab(double speed)
   {
-    lift.set(power);
+    leftWheel.set(speed);
+    rightWheel.set(speed);
   }
 
-  public void goDown(double power)
+  public void outtake(double speed)
   {
-    lift.set(-power);
+    leftWheel.set(-speed);
+    rightWheel.set(-speed);
   }
 
-  public void stop()
+  public void stopIntake()
   {
-    lift.stopMotor();
+    leftWheel.stopMotor();
+    rightWheel.stopMotor();
   }
 
-  //encoders
-  public double getEncoderPos()
+  public boolean getLimit()
   {
-    return SMencoder.getPosition();
+    return item.get();
   }
 
   @Override

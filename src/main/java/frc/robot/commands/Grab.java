@@ -10,36 +10,39 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftElbow extends Command 
+public class Grab extends Command 
 {
-  public LiftElbow() 
+  public Grab() 
   {
-    requires(Robot.elbow);
+    requires(Robot.intake);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize() 
+  {
+  
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() 
   {
-    Robot.elbow.liftElbow(0.5);
+    Robot.intake.grab(0.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    return false;
+  protected boolean isFinished() 
+  {
+    return Robot.intake.getLimit();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() 
   {
-    Robot.elbow.stopElbow();
+    Robot.intake.stopIntake();
   }
 
   // Called when another command which requires one or more of the same

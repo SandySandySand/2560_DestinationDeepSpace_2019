@@ -16,10 +16,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.ColorSensor;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.HatchPanel;
 import frc.robot.subsystems.Elbow;
+import frc.robot.subsystems.Intake;;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,7 +34,8 @@ public class Robot extends TimedRobot
   public static DriveTrain drivetrain;
   public static Elevator elevator;
   public static Elbow elbow;
-  public static ColorSensor color;
+  public static Intake intake;
+  public static HatchPanel hatch;
   public static UsbCamera camera;
   public static OI m_oi;
 
@@ -49,8 +51,9 @@ public class Robot extends TimedRobot
     drivetrain = new DriveTrain();
     elevator = new Elevator();
     elbow = new Elbow();
-    color = new ColorSensor(I2C.Port.kOnboard); //color sensor attached to roborio
-    m_oi = new OI();
+    intake = new Intake();
+    hatch = new HatchPanel();
+     m_oi = new OI();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -128,17 +131,18 @@ public class Robot extends TimedRobot
     if (m_autonomousCommand != null) 
     {
       m_autonomousCommand.cancel();
-    }
-    SmartDashboard.putNumber("SparkMAX Encoder Value", Robot.elevator.getEncoderPos());
-    SmartDashboard.putRaw("ColorSensor Data", Robot.color.read());
+    } 
   }
 
   /**
    * This function is called periodically during operator control.
    */
   @Override
-  public void teleopPeriodic() {
+  public void teleopPeriodic() 
+  {
     Scheduler.getInstance().run();
+    SmartDashboard.putNumber("SparkMAX Encoder Value", Robot.elevator.getEncoderPos());
+    SmartDashboard.putNumber("RS7 Encoder Value", Robot.elbow.getPosition());
   }
 
   /**

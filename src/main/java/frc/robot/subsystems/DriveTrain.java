@@ -13,10 +13,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveWithGamepad;
 
@@ -28,11 +28,11 @@ public class DriveTrain extends Subsystem implements PIDOutput
   WPI_TalonSRX left, right, leftFollow, rightFollow;
   AHRS navx;
   DifferentialDrive myDrive;
-  public PIDController rotatePID, drivePID;
+  public PIDController rotatePID;
 
-  public double kPr = 0.3;
-	public double kIr = 0;
-	public double kDr = 0;
+  protected double kPr = 0.3;
+	protected double kIr = 0;
+	protected double kDr = 0;
 
   public DriveTrain()
   {
@@ -53,15 +53,12 @@ public class DriveTrain extends Subsystem implements PIDOutput
     myDrive = new DifferentialDrive(left, right);
 
     //initalizing the navx
-    navx = new AHRS(Port.kMXP); //subject to change
+    navx = new AHRS(Port.kUSB1); //subject to change
 
     //PID Controller Init for Gyro
     rotatePID = new PIDController(kPr, kIr, kDr, navx, this);
     rotatePID.setInputRange(-360, 360);
     rotatePID.setOutputRange(-1.0, 1.0);
-
-    //PID Controller Init for driving
-    //coming soon
   }  
 
   public void pidWrite(double output) 
@@ -73,6 +70,11 @@ public class DriveTrain extends Subsystem implements PIDOutput
   public void arcaDrive(double speed, double rotate)
   {
     myDrive.arcadeDrive(speed, rotate);
+  }
+
+  public void stop()
+  {
+    myDrive.tankDrive(0, 0);
   }
 
   //Gyro Methods

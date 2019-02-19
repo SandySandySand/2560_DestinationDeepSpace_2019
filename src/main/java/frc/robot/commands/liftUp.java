@@ -27,13 +27,17 @@ public class LiftUp extends Command
   @Override
   protected void execute() 
   {
-    Robot.elevator.liftUp(0.85);
+    Robot.elevator.liftUp(0.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    return false;
+  protected boolean isFinished() 
+  {
+    // if (Robot.elevator.getEncoderPos() >= Robot.elevator.programmingStop)
+    //   return true;
+    // else
+      return false;
   }
 
   // Called once after isFinished returns true
