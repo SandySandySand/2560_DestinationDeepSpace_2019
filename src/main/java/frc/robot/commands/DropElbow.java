@@ -25,7 +25,7 @@ public class DropElbow extends Command {
   @Override
   protected void execute() 
   {
-    Robot.elbow.dropElbow(0.5);
+    Robot.elbow.dropElbow(0.4);
   }
 
   // Make this return true when this Command no longer needs to run execute()

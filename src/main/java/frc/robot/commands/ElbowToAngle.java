@@ -13,12 +13,13 @@ import frc.robot.Robot;
 public class ElbowToAngle extends Command 
 {
 
-  private double requiredAngle;
+  private double requiredAngle, ticksTo;
   private boolean fin;
 
   public ElbowToAngle(double requiredAngle) 
   {
     requires(Robot.elbow);
+    this.requiredAngle = requiredAngle;
   }
 
   // Called just before this Command runs the first time
@@ -26,15 +27,14 @@ public class ElbowToAngle extends Command
   protected void initialize() 
   {
     Robot.elbow.resetEnc();
+    ticksTo = requiredAngle * Robot.elbow.TICKS_PER_DEGREE;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() 
   {
-    double ticksTo = requiredAngle * Robot.elbow.TICKS_PER_DEGREE;
-
-    Robot.elbow.dropElbow(0.35);
+    Robot.elbow.liftElbow(0.45);
 
     if(Robot.elbow.getPosition() >= ticksTo)
       fin = true;

@@ -16,6 +16,6 @@ public class FirstLevelHatchPanel extends CommandGroup
    */
   public FirstLevelHatchPanel() 
   {
-    
+    addSequential(new ElbowToNinety());
   }
 }

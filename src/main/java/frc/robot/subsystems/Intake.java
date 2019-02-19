@@ -48,7 +48,7 @@ public class Intake extends Subsystem
 
   public boolean getLimit()
   {
-    return item.get();
+    return !(item.get());
   }
 
   @Override

@@ -12,41 +12,38 @@ import frc.robot.Robot;
 
 public class LiftToHeight extends Command 
 {
-
-  private double requiredHeight;
-  private boolean fin;
+  private double requiredHeight, ticksTo;
 
   public LiftToHeight(double requiredHeight) 
   {
     requires(Robot.elevator);
+    this.requiredHeight = requiredHeight;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() 
   {
+    //ticksTo = level height (in) * ticks per inch
+    ticksTo = requiredHeight * Robot.elevator.TICKS_PER_INCH;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() 
-  {
-    //ticksTo = level height (in) * ticks per inch
-    double ticksTo = requiredHeight * Robot.elevator.TICKS_PER_INCH;
+  { 
     //runs elevator
-    Robot.elevator.liftUp(0.35);
-
-    if(Robot.elevator.getEncoderPos() >= ticksTo)
-      fin = true;
-    else
-      fin = false;
+    Robot.elevator.liftUp(0.45);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() 
   {
-    return fin;
+    if(Robot.elevator.getEncoderPos() < ticksTo)
+      return false;
+    else
+      return true;
   }
 
   // Called once after isFinished returns true

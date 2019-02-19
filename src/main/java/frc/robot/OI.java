@@ -23,8 +23,8 @@ public class OI
 
    public OI()
    {
-      joy1 = new Joystick(1);
-      joy2 = new Joystick(2);
+      joy1 = new Joystick(0);
+      joy2 = new Joystick(1);
 
       // joy2 buttons (Single Commands)
       up = new JoystickButton(joy2, RobotMap.up);

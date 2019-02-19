@@ -28,7 +28,7 @@ public class Out extends Command
   @Override
   protected void execute() 
   {
-    Robot.intake.outtake(0.5);
+    Robot.intake.outtake(0.35);
   }
 
   // Make this return true when this Command no longer needs to run execute()

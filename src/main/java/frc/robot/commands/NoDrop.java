@@ -29,8 +29,6 @@ public class NoDrop extends Command
   {
     if (Robot.elbow.getPosition() > Robot.elbow.NO_BELOW)
       Robot.elbow.liftElbow(0.5);
-    else 
-      Robot.elbow.stopElbow();
   }
 
   // Make this return true when this Command no longer needs to run execute()

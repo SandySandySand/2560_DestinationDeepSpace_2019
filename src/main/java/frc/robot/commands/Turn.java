@@ -33,7 +33,6 @@ public class Turn extends Command
   @Override
   protected void execute() 
   {
-    double currentAngle = Robot.drivetrain.getAngle();
     Robot.drivetrain.arcaDrive(0, Robot.drivetrain.rotatePID.get());
   }
 

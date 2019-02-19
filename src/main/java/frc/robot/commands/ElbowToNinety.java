@@ -27,14 +27,14 @@ public class ElbowToNinety extends Command
   @Override
   protected void execute() 
   {
-    Robot.elbow.liftElbow(0.35);
+    Robot.elbow.dropElbow(0.35);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() 
   {
-    return Robot.elbow.getNinety();
+    return !Robot.elbow.getNinety();
   }
 
   // Called once after isFinished returns true

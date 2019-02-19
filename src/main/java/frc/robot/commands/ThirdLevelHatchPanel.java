@@ -7,8 +7,8 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class ThirdLevelHatchPanel extends CommandGroup 
 {
@@ -18,10 +18,8 @@ public class ThirdLevelHatchPanel extends CommandGroup
   public ThirdLevelHatchPanel() 
   {
     addSequential(new LiftToHeight(75)); // lifts to third level
-     Timer.delay(5); //pause for effect (mostly testing)
-    // addSequential(new StallLift(), 2);
-    addParallel(new HatchPanelPopOn(), 3); //place hatch on
-    Timer.delay(5); //pause for effect (mostly testing)
+    addSequential(new StallLift(), 2);
+    Timer.delay(2);
     addSequential(new DropToHeight(1)); //drop to lowest
   }
 }

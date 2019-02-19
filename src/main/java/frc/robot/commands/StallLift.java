@@ -27,7 +27,7 @@ public class StallLift extends Command
   @Override
   protected void execute() 
   {
-    Robot.elevator.liftUp(0.15);
+    Robot.elevator.liftUp(0.05);
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -18,6 +18,7 @@ public class DropToHeight extends Command
   public DropToHeight(double requiredHeight) 
   {
     requires(Robot.elevator);
+    this.requiredHeight = requiredHeight;
   }
 
   // Called just before this Command runs the first time

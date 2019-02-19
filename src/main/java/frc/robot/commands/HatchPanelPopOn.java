@@ -10,7 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class HatchPanelPopOn extends Command {
+public class HatchPanelPopOn extends Command 
+{
   public HatchPanelPopOn() 
   {
     requires(Robot.hatch);
