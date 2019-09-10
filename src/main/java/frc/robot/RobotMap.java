@@ -24,7 +24,7 @@ public class RobotMap
 
   //multiplier values
   public static double arcaSpeedMulti = 0.85;
-  public static double arcaRotateMulti = 0.75;
+  public static double arcaRotateMulti = 0.95;
 
   //Buttons Controller 1
   public static int oneHP = 1;
